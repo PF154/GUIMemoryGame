@@ -8,12 +8,13 @@ public class MemoryModel {
 	
 	private int rows, columns;
 	
-//	private 
+	private Character selection;
 	
 	public MemoryModel() {
 		this.alphabet = new LatinAlphabet();
 		this.rows = 3;
 		this.columns = 4;
+		this.selection = null;
 		
 		intitializeMemoryGrid();
 	}
@@ -44,6 +45,14 @@ public class MemoryModel {
 	
 	public int getColumns() {
 		return columns;
+	}
+	
+	public Character getSelection() {
+		return selection;
+	}
+	
+	public void setSelection(Character c) {
+		selection = c;
 	}
 	
 }

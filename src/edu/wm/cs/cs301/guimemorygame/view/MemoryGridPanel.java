@@ -48,7 +48,12 @@ public class MemoryGridPanel extends JPanel {
 		MemoryCard[] cardSet = model.getMemoryGrid()[rowIndex];
 		
 		for (int i = 0; i < width; i++) {
-			String symbol = cardSet[i].getSymbol().toString();
+			String symbol;
+			if (cardSet[i].isVisible()) {
+				symbol = cardSet[i].getSymbol().toString();
+			} else {
+				symbol = "?";
+			}
 			MemoryCardButton button = new MemoryCardButton(symbol, cardSet[i]);
 			button.addActionListener(cardClickAction);
 			//button.setFont(something...);
