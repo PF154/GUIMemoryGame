@@ -8,6 +8,8 @@ public class MemoryModel {
 	
 	private int rows, columns;
 	
+//	private 
+	
 	public MemoryModel() {
 		this.alphabet = new LatinAlphabet();
 		this.rows = 3;

@@ -21,10 +21,10 @@ public class MemoryGridPanel extends JPanel {
 	
 	private final CardClickAction cardClickAction;
 	
-	public MemoryGridPanel(MemoryFrame frame, MemoryModel model) {
-		this.view = frame;
+	public MemoryGridPanel(MemoryFrame view, MemoryModel model) {
+		this.view = view;
 		this.model = model;
-		this.cardClickAction = new CardClickAction();
+		this.cardClickAction = new CardClickAction(this.view, this.model);
 		this.panel = createMainPanel();
 	}
 	
@@ -45,10 +45,11 @@ public class MemoryGridPanel extends JPanel {
 		JPanel panel = new JPanel(new FlowLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		
-		MemoryCard[] symbolSet = model.getMemoryGrid()[rowIndex];
+		MemoryCard[] cardSet = model.getMemoryGrid()[rowIndex];
 		
 		for (int i = 0; i < width; i++) {
-			JButton button = new JButton(symbolSet[i].getSymbol().toString());
+			String symbol = cardSet[i].getSymbol().toString();
+			MemoryCardButton button = new MemoryCardButton(symbol, cardSet[i]);
 			button.addActionListener(cardClickAction);
 			//button.setFont(something...);
 			panel.add(button);
