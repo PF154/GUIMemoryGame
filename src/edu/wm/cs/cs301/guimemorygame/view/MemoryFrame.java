@@ -34,7 +34,7 @@ public class MemoryFrame {
 			}
 		});
 		
-		frame.add(memoryGridPanel, BorderLayout.CENTER);
+		frame.add(memoryGridPanel.getPanel(), BorderLayout.CENTER);
 		
 		frame.pack();
 		frame.setLocationByPlatform(true);
