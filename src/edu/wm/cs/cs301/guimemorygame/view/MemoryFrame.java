@@ -18,7 +18,7 @@ public class MemoryFrame {
 	
 	public MemoryFrame(MemoryModel model) {
 		this.model = model;
-		this.memoryGridPanel = new MemoryGridPanel();
+		this.memoryGridPanel = new MemoryGridPanel(this, model);
 		this.frame = createAndShowGUI();
 	}
 	

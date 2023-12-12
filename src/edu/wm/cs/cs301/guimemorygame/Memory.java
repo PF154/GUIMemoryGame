@@ -12,12 +12,13 @@ public class Memory implements Runnable {
 		SwingUtilities.invokeLater(new Memory());
 		
 		// cross-platform setup
-		try {
-		    UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
-		 } catch (Exception e) {
-			 e.printStackTrace();
-		 }
-
+		if (!System.getProperty("os.name").contains("Windows")) {
+			try {
+			    UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
