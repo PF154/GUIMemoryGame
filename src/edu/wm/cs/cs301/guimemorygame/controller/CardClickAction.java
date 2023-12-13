@@ -42,6 +42,7 @@ public class CardClickAction extends AbstractAction {
 					button.flip();
 				}
 				model.setSelection(null);
+				
 			}
 			// Access model to see if this is first or second card
 			// If it is first...
