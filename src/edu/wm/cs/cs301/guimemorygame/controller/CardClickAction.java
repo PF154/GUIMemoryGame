@@ -28,16 +28,20 @@ public class CardClickAction extends AbstractAction {
 //			System.out.println("Clicked button with visibility false");
 			if (model.getSelection() == null) {
 				button.flip();
-				model.setSelection(button.getSymbol());
+				model.setSelection(button);
 			} else {
 				button.flip();
-				if (model.getSelection() == button.getSymbol()) {
+				if (model.getSelection().getSymbol() == button.getSymbol()) {
 					// Match!
 					// Keep cards flipped
+					// increment match counter
 				} else {
 					// No match :(
 					// Flip cards back over after 2 secs
+					model.getSelection().flip();
+					button.flip();
 				}
+				model.setSelection(null);
 			}
 			// Access model to see if this is first or second card
 			// If it is first...

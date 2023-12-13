@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import edu.wm.cs.cs301.guimemorygame.view.MemoryCardButton;
+
 public class MemoryModel {
 	
 	private MemoryCard[][] memoryGrid;
@@ -13,7 +15,7 @@ public class MemoryModel {
 	
 	private int rows, columns;
 	
-	private Character selection;
+	private MemoryCardButton selection;
 	
 	public MemoryModel() {
 		this.alphabet = new LatinAlphabet();
@@ -78,11 +80,11 @@ public class MemoryModel {
 		return columns;
 	}
 	
-	public Character getSelection() {
+	public MemoryCardButton getSelection() {
 		return selection;
 	}
 	
-	public void setSelection(Character c) {
+	public void setSelection(MemoryCardButton c) {
 		selection = c;
 	}
 	

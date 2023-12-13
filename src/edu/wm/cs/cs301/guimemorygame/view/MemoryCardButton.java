@@ -15,8 +15,11 @@ public class MemoryCardButton extends JButton {
 	
 	private boolean visible;
 	
+	private MemoryCard memoryCard;
+	
 	public MemoryCardButton(String text, MemoryCard mc) {
 		super(text);
+		this.memoryCard = mc;
 		this.symbol = mc.getSymbol();
 		this.visible = mc.isVisible();
 //		System.out.println("Created a card with visibility " + String.valueOf(visible));
@@ -44,6 +47,10 @@ public class MemoryCardButton extends JButton {
 //			repaint();
 			// Code to change displayed text to symbol
 		}
+	}
+	
+	public MemoryCard getMemoryCard() {
+		return memoryCard;
 	}
 	
 }
