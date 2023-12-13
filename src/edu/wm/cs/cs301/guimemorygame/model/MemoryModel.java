@@ -1,5 +1,10 @@
 package edu.wm.cs.cs301.guimemorygame.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class MemoryModel {
 	
 	private MemoryCard[][] memoryGrid;
@@ -22,12 +27,38 @@ public class MemoryModel {
 	private void intitializeMemoryGrid() {
 		memoryGrid = new MemoryCard[rows][columns];
 		
-		// dummy code to give values to grid, will be changed eventually
-		for (int i = 0; i < memoryGrid.length; i++) {
-			for (int j = 0; j < memoryGrid[0].length; j++) {
-				memoryGrid[i][j] = new CharacterMemoryCard('X');
+		ArrayList<Character> symbolSet = new ArrayList<Character>();
+		for(char c : alphabet.toCharArray()) {
+			symbolSet.add(c);
+		}
+		Collections.shuffle(symbolSet);
+		
+		// Add two of however many symbols are needed to boardSymbols, then shuffle the order
+		int numMatches = rows * columns / 2;
+		ArrayList<Character> boardSymbols = new ArrayList<Character>();
+		for (int i = 0; i < numMatches; i++) {
+			boardSymbols.add(symbolSet.get(i));
+			boardSymbols.add(symbolSet.get(i));
+		}
+		Collections.shuffle(boardSymbols);
+		
+		// Iterate through the board and place the symbols
+		int symbolNum = 0;
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				MemoryCard newMemoryCard = new CharacterMemoryCard(boardSymbols.get(symbolNum)); 
+				memoryGrid[i][j] = newMemoryCard;
+				symbolNum++;
 			}
 		}
+
+		
+		// dummy code to give values to grid, will be changed eventually
+//		for (int i = 0; i < memoryGrid.length; i++) {
+//			for (int j = 0; j < memoryGrid[0].length; j++) {
+//				memoryGrid[i][j] = new CharacterMemoryCard('X');
+//			}
+//		}
 	}
 	
 	public MemoryCard[][] getMemoryGrid() {
