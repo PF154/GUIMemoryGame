@@ -36,6 +36,11 @@ public class CardClickAction extends AbstractAction {
 					// Match!
 					// Keep cards flipped
 					// increment match counter
+					model.incrementMatches();
+					if (model.winState()) {
+						view.getTurnPanel().updateLabel("You Win!");
+						view.getFrame().pack();
+					}
 				} else {
 					// No match :(
 					// Flip cards back over after 2 secs

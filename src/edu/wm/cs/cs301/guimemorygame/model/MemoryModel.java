@@ -17,6 +17,8 @@ public class MemoryModel {
 	
 	private int turn;
 	
+	private int matches;
+	
 	private MemoryCardButton selection;
 	
 	public MemoryModel() {
@@ -65,6 +67,7 @@ public class MemoryModel {
 //		}
 		
 		turn = 1;
+		matches = 0;
 	}
 	
 	public MemoryCard[][] getMemoryGrid() {
@@ -98,6 +101,23 @@ public class MemoryModel {
 	
 	public void incrementTurn() {
 		turn += 1;
+	}
+	
+	public int getMatches() {
+		return matches;
+	}
+	
+	public void incrementMatches() {
+		matches += 1;
+	}
+	
+	public boolean winState() {
+		int needed = (rows * columns) / 2;
+		if (matches == needed) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }
