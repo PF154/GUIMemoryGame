@@ -1,9 +1,11 @@
 package edu.wm.cs.cs301.guimemorygame.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.Timer;
 
 import edu.wm.cs.cs301.guimemorygame.model.MemoryModel;
 import edu.wm.cs.cs301.guimemorygame.view.MemoryCardButton;
@@ -26,12 +28,12 @@ public class CardClickAction extends AbstractAction {
 		MemoryCardButton button = (MemoryCardButton) e.getSource();
 		if (button.getVisibility() == false) {
 //			System.out.println("Clicked button with visibility false");
+			button.flip();
+			view.getFrame().pack();
+			System.out.println("Flipped over button");
 			if (model.getSelection() == null) {
-				button.flip();
-				view.getFrame().pack();
 				model.setSelection(button);
 			} else {
-				button.flip();
 				if (model.getSelection().getSymbol() == button.getSymbol()) {
 					// Match!
 					// Keep cards flipped
@@ -44,8 +46,16 @@ public class CardClickAction extends AbstractAction {
 				} else {
 					// No match :(
 					// Flip cards back over after 2 secs
-					model.getSelection().flip();
-					button.flip();
+					MemoryCardButton button2 = model.getSelection();
+					Timer timer = new Timer(2000, new ActionListener() {
+	                    public void actionPerformed(ActionEvent e) {
+	                    	Thread t = new Thread(new DoubleFlipRunnable(button, button2));
+	                    	t.start();
+	                    };
+	                });
+					timer.setRepeats(false);
+					timer.start();
+
 					model.incrementTurn();
 					view.getTurnPanel().updateLabel("Turn: " + String.valueOf(model.getTurn()));
 					view.getFrame().pack();

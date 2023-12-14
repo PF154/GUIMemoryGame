@@ -40,15 +40,14 @@ public class MemoryCardButton extends JButton {
 		if(visible) {
 			visible = false;
 			displaySymbol  = "?";
-			setText(displaySymbol);
 			// Need to do something here to repack the buttons with new size
 			// Code to change displayed text to question mark
 		} else {
 			visible = true;
 			displaySymbol  = symbol.toString();
-			setText(displaySymbol);
 			// Code to change displayed text to symbol
 		}
+		setText(displaySymbol);
 	}
 	
 	public MemoryCard getMemoryCard() {

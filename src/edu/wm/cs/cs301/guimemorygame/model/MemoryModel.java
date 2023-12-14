@@ -15,6 +15,7 @@ public class MemoryModel {
 	
 	private int rows, columns;
 	
+	// Final score needs to be turn - 1, since this tracks the current turn... maybe
 	private int turn;
 	
 	private int matches;
