@@ -18,11 +18,15 @@ public class MemoryFrame {
 	
 	private TurnPanel turnPanel;
 	
+	private InstructionsWindow instructions;
+	
 	public MemoryFrame(MemoryModel model) {
 		this.model = model;
 		this.memoryGridPanel = new MemoryGridPanel(this, model);
 		this.turnPanel = new TurnPanel(model);
 		this.frame = createAndShowGUI();
+		
+		this.instructions = new InstructionsWindow(this);
 	}
 	
 	private JFrame createAndShowGUI() {
