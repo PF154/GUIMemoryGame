@@ -29,6 +29,7 @@ public class MemoryCardButton extends JButton {
 	
 	public Character getSymbol() {
 		return symbol;
+		// These functions should probably modify the MC as well to keep it updated
 	}
 	
 	public boolean getVisibility() {

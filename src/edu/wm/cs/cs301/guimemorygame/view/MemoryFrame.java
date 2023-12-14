@@ -16,9 +16,12 @@ public class MemoryFrame {
 	
 	private MemoryGridPanel memoryGridPanel;
 	
+	private TurnPanel turnPanel;
+	
 	public MemoryFrame(MemoryModel model) {
 		this.model = model;
 		this.memoryGridPanel = new MemoryGridPanel(this, model);
+		this.turnPanel = new TurnPanel(model);
 		this.frame = createAndShowGUI();
 	}
 	
@@ -35,6 +38,8 @@ public class MemoryFrame {
 		});
 		
 		frame.add(memoryGridPanel.getPanel(), BorderLayout.CENTER);
+		frame.add(turnPanel.getPanel(), BorderLayout.SOUTH);
+
 		
 		frame.pack();
 		frame.setLocationByPlatform(true);
@@ -53,6 +58,10 @@ public class MemoryFrame {
 
 	public JFrame getFrame() {
 		return frame;
+	}
+	
+	public TurnPanel getTurnPanel() {
+		return turnPanel;
 	}
 
 }

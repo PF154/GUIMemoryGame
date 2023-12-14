@@ -15,6 +15,8 @@ public class MemoryModel {
 	
 	private int rows, columns;
 	
+	private int turn;
+	
 	private MemoryCardButton selection;
 	
 	public MemoryModel() {
@@ -61,6 +63,8 @@ public class MemoryModel {
 //				memoryGrid[i][j] = new CharacterMemoryCard('W');
 //			}
 //		}
+		
+		turn = 1;
 	}
 	
 	public MemoryCard[][] getMemoryGrid() {
@@ -86,6 +90,14 @@ public class MemoryModel {
 	
 	public void setSelection(MemoryCardButton c) {
 		selection = c;
+	}
+	
+	public int getTurn() {
+		return turn;
+	}
+	
+	public void incrementTurn() {
+		turn += 1;
 	}
 	
 }

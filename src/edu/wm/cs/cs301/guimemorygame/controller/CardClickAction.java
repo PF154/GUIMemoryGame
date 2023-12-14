@@ -41,6 +41,8 @@ public class CardClickAction extends AbstractAction {
 					// Flip cards back over after 2 secs
 					model.getSelection().flip();
 					button.flip();
+					model.incrementTurn();
+					view.getTurnPanel().updateLabel("Turn: " + String.valueOf(model.getTurn()));
 					view.getFrame().pack();
 				}
 				model.setSelection(null);
