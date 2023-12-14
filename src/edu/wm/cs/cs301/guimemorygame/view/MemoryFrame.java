@@ -23,7 +23,7 @@ public class MemoryFrame {
 	}
 	
 	private JFrame createAndShowGUI() {
-		JFrame frame = new JFrame("Wordle");
+		JFrame frame = new JFrame("Memory");
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		//frame.setJMenuBar(createMenuBar());
 		frame.setResizable(false);
@@ -51,5 +51,8 @@ public class MemoryFrame {
 		System.exit(0);
 	}
 
+	public JFrame getFrame() {
+		return frame;
+	}
 
 }

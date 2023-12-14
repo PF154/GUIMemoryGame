@@ -58,7 +58,7 @@ public class MemoryModel {
 		// dummy code to give values to grid, will be changed eventually
 //		for (int i = 0; i < memoryGrid.length; i++) {
 //			for (int j = 0; j < memoryGrid[0].length; j++) {
-//				memoryGrid[i][j] = new CharacterMemoryCard('X');
+//				memoryGrid[i][j] = new CharacterMemoryCard('W');
 //			}
 //		}
 	}

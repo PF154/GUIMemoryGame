@@ -28,6 +28,7 @@ public class CardClickAction extends AbstractAction {
 //			System.out.println("Clicked button with visibility false");
 			if (model.getSelection() == null) {
 				button.flip();
+				view.getFrame().pack();
 				model.setSelection(button);
 			} else {
 				button.flip();
@@ -40,6 +41,7 @@ public class CardClickAction extends AbstractAction {
 					// Flip cards back over after 2 secs
 					model.getSelection().flip();
 					button.flip();
+					view.getFrame().pack();
 				}
 				model.setSelection(null);
 				

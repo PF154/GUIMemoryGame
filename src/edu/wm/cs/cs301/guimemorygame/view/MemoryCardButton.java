@@ -1,6 +1,8 @@
 package edu.wm.cs.cs301.guimemorygame.view;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import edu.wm.cs.cs301.guimemorygame.model.MemoryCard;
 
@@ -38,13 +40,12 @@ public class MemoryCardButton extends JButton {
 			visible = false;
 			displaySymbol  = "?";
 			setText(displaySymbol);
-//			repaint();
+			// Need to do something here to repack the buttons with new size
 			// Code to change displayed text to question mark
 		} else {
 			visible = true;
 			displaySymbol  = symbol.toString();
 			setText(displaySymbol);
-//			repaint();
 			// Code to change displayed text to symbol
 		}
 	}
