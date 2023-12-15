@@ -40,6 +40,8 @@ public class MemoryFrame {
 		this.frame = createAndShowGUI();
 		
 		this.instructions = new InstructionsWindow(this);
+		
+		loadLeaderboardWindow();
 	}
 	
 	private JFrame createAndShowGUI() {
@@ -84,6 +86,10 @@ public class MemoryFrame {
 		JMenuItem hardItem = new JMenuItem("Hard");
 		hardItem.addActionListener(event -> setDifficulty(2));
 		difficultyMenu.add(hardItem);
+		
+		JMenuItem exitMenu = new JMenuItem("Exit");
+		exitMenu.addActionListener(event -> shutdown());
+		menuBar.add(exitMenu);
 
 		
 		return menuBar;
@@ -132,6 +138,7 @@ public class MemoryFrame {
 		memoryGridPanel = new MemoryGridPanel(this, model);
 		frame.dispose();
 		frame = createAndShowGUI();
+		loadLeaderboardWindow();
 		turnPanel.updateLabel("Turn: " + String.valueOf(model.getTurn()));
 	}
 	

@@ -51,8 +51,6 @@ public class CardClickAction extends AbstractAction {
 						// Load post-game windows in order 
 						view.promptLeaderboard();
 						
-						view.loadLeaderboardWindow();
-						
 						view.loadPlayAgainWindow();
 					}
 				} else {
