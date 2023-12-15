@@ -30,6 +30,8 @@ public class MemoryFrame {
 	
 	private PlayAgainWindow playAgainWindow;
 	
+	private LeaderboardPromptWindow leaderboardPromptWindow;
+	
 	public MemoryFrame(MemoryModel model) {
 		this.model = model;
 		this.memoryGridPanel = new MemoryGridPanel(this, model);
@@ -132,6 +134,14 @@ public class MemoryFrame {
 		frame.dispose();
 		frame = createAndShowGUI();
 		turnPanel.updateLabel("Turn: " + String.valueOf(model.getTurn()));
+	}
+	
+	public void promptLeaderboard() {
+		leaderboardPromptWindow = new LeaderboardPromptWindow(this,  model);
+	}
+	
+	public void loadLeaderboardWindow() {
+		LeaderboardWindow leaderboardWindow = new LeaderboardWindow(this, model);
 	}
 
 }

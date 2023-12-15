@@ -29,10 +29,4 @@ public class CharacterMemoryCard implements MemoryCard {
 	public Character getSymbol() {
 		return symbol;
 	}
-	
-//	public JButton getButton(boolean flipped) {
-//		Will return a the button corresponding to the memory card in the
-//		correct state, that is, it will have a character label if it is 
-//		flipped, and no label if it is not.
-//	}
 }

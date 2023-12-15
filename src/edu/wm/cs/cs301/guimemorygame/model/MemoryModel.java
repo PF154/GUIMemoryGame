@@ -1,9 +1,13 @@
 package edu.wm.cs.cs301.guimemorygame.model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import edu.wm.cs.cs301.guimemorygame.view.MemoryCardButton;
 
@@ -24,17 +28,31 @@ public class MemoryModel {
 	
 	private MemoryCardButton selection;
 	
+	private File leaderboardFile;
+	private String leaderboardPath = "resources\\leaderboard.txt";
+	
+	private String[][] leaderboard = new String[3][2];
+	
+	private String playerName;
+	
 	public MemoryModel() {
 		this.alphabet = new LatinAlphabet();
-		this.rows = 3;
-		this.columns = 4;
+		this.rows = 4;
+		this.columns = 7;
 		this.selection = null;
 		this.difficulty = 1;
+		
+		loadLeaderboard(true);
 		
 		initializeMemoryGrid();
 	}
 	
 	public void initializeMemoryGrid() {
+		/*
+		 * Creates a shuffled character set and populates the board.
+		 * Initializes some game variables.
+		 */
+		
 		memoryGrid = new MemoryCard[rows][columns];
 		
 		ArrayList<Character> symbolSet = new ArrayList<Character>();
@@ -61,44 +79,134 @@ public class MemoryModel {
 				symbolNum++;
 			}
 		}
-
-		
-		// dummy code to give values to grid, will be changed eventually
-//		for (int i = 0; i < memoryGrid.length; i++) {
-//			for (int j = 0; j < memoryGrid[0].length; j++) {
-//				memoryGrid[i][j] = new CharacterMemoryCard('W');
-//			}
-//		}
 		
 		turn = 1;
 		matches = 0;
 	}
 	
-	public void setDifficulty(int difficulty) {
-		switch(difficulty) {
+	public void setDifficulty(int d) {
+		switch(d) {
 		case 0:
 			rows = 3;
 			columns = 4;
+			difficulty = 0;
 			// Set leaderboard info however you want to do that here
 			initializeMemoryGrid();
 			break;
 		case 1:
 			rows = 4;
 			columns = 7;
+			difficulty = 1;
 			// Set leaderboard info however you want to do that here
 			initializeMemoryGrid();
 			break;
 		case 2:
 			rows = 7;
 			columns = 8;
+			difficulty = 2;
 			// Set leaderboard info however you want to do that here
 			initializeMemoryGrid();
 			break;
+		}	
+	}
+	
+	public void addToLeaderboard() {
+		/*
+		 * Add a new element to the leaderboard of the appropriate difficulty
+		 */
+		if (difficulty == 0) {
+			if (leaderboard[0][0] != null) {
+				if (turn < Integer.parseInt(leaderboard[0][1])) {
+					leaderboard[0][0] = playerName;
+					leaderboard[0][1] = String.valueOf(turn);
+				}
+			} else {
+				leaderboard[0][0] = playerName;
+				leaderboard[0][1] = String.valueOf(turn);
+			}
+		} else if (difficulty == 1) {
+			if (leaderboard[1][0] != null) {
+				if (turn < Integer.parseInt(leaderboard[1][1])) {
+					leaderboard[1][0] = playerName;
+					leaderboard[1][1] = String.valueOf(turn);
+				}
+			} else {
+				leaderboard[1][0] = playerName;
+				leaderboard[1][1] = String.valueOf(turn);
+			}
+		} else if (difficulty == 2) {
+			if (leaderboard[2][0] != null) {
+				if (turn < Integer.parseInt(leaderboard[2][1])) {
+					leaderboard[2][0] = playerName;
+					leaderboard[2][1] = String.valueOf(turn);
+				}
+			} else {
+				leaderboard[2][0] = playerName;
+				leaderboard[2][1] = String.valueOf(turn);
+			}
 		}
+		
+		// Update the file where the leaderboard is stored with the new information
+		try {
+			FileWriter lbUpdate = new FileWriter(leaderboardPath, false);
 			
+			lbUpdate.write("easy\n");
+			if (leaderboard[0][0] != null) {
+				lbUpdate.write(leaderboard[0][0] + ", " + leaderboard[0][1] + "\n");
+			}
+			lbUpdate.write("medium\n");
+			if (leaderboard[1][0] != null) {
+				lbUpdate.write(leaderboard[1][0] + ", " + leaderboard[1][1] + "\n");
+			}
+			lbUpdate.write("hard\n");
+			if (leaderboard[2][0] != null) {
+				lbUpdate.write(leaderboard[2][0] + ", " + leaderboard[2][1] + "\n");
+			}
+			lbUpdate.close();
 			
+		} catch (IOException e) {
+			System.out.println("An error occured. Couldn't update leaderboard");
+			e.printStackTrace();
+		}
 	}
 
+	
+	private void loadLeaderboard(boolean createNew) {
+		/*
+		 * Load the leaderboard in and assign its data to the leaderboard array
+		 */
+		try {
+			leaderboardFile = new File(leaderboardPath);
+			if(createNew == true) { // We will only run this when it is called at the start of the program, otherwise we have the file
+				leaderboardFile.createNewFile();
+			}
+			Scanner lbRead = new Scanner(leaderboardFile);
+			
+			String currentDifficulty = null;
+			while (lbRead.hasNextLine()) {
+				String line = lbRead.nextLine();
+				if(line.equals("easy") || line.equals("medium") || line.equals("hard")) { // Keep track of what subarray to add to
+					currentDifficulty = line;
+				} else {
+					// Our line is a data entry, add it to the appropriate leaderboard
+					String[] entryData = line.split(", "); // Separate name and score
+					if(currentDifficulty.equals("easy")) {
+						leaderboard[0][0] = entryData[0];
+						leaderboard[0][1] = entryData[1];
+					} else if(currentDifficulty.equals("medium")) {
+						leaderboard[1][0] = entryData[0];
+						leaderboard[1][1] = entryData[1];
+					} else if(currentDifficulty.equals("hard")) {
+						leaderboard[2][0] = entryData[0];
+						leaderboard[2][1] = entryData[1];
+					}
+				}
+			}
+			lbRead.close();
+		} catch (IOException e) {
+			System.out.println("An error occured. Couldn't create leaderboard.");
+		}
+	}
 	
 	public MemoryCard[][] getMemoryGrid() {
 		return memoryGrid;
@@ -145,4 +253,15 @@ public class MemoryModel {
 		}
 	}
 	
+	public String getPlayerName() {
+		return playerName;
+	}
+	
+	public void setPlayerName(String name) {
+		playerName = name;
+	}
+	
+	public String[][] getLeaderboard() {
+		return leaderboard;
+	}
 }

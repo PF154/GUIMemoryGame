@@ -27,15 +27,17 @@ public class CardClickAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		MemoryCardButton button = (MemoryCardButton) e.getSource();
 		if (button.getVisibility() == false) {
+			// Flip the button over
 			view.getFeedbackPanel().updateLabel("");
 			view.getFrame().pack();
 //			System.out.println("Clicked button with visibility false");
 			button.flip();
 			view.getFrame().pack();
 //			System.out.println("Flipped over button");
-			if (model.getSelection() == null) {
+			
+			if (model.getSelection() == null) {		// First guess
 				model.setSelection(button);
-			} else {
+			} else {	// Second guess
 				if (model.getSelection().getSymbol() == button.getSymbol()) {
 					// Match!
 					// Keep cards flipped
@@ -45,6 +47,11 @@ public class CardClickAction extends AbstractAction {
 						String finalTurn = String.valueOf(model.getTurn());
 						view.getTurnPanel().updateLabel("You won in " + finalTurn + " turn(s)!");
 						view.getFrame().pack();
+						
+						// Load post-game windows in order 
+						view.promptLeaderboard();
+						
+						view.loadLeaderboardWindow();
 						
 						view.loadPlayAgainWindow();
 					}
@@ -68,16 +75,8 @@ public class CardClickAction extends AbstractAction {
 				model.setSelection(null);
 				
 			}
-			// Access model to see if this is first or second card
-			// If it is first...
-			// 		Flip card over
-			//		Store symbol in model
-			// IF it is second...
-			//		Flip card over
-			// 		Compare to symbol stored in model
-			//		Keep flipped if they're the same
-			//		Turn back over if they aren't
 		} else {
+			// Correct the player if the game is still going and they chose an invalid card
 			if (!model.winState()) {
 				view.getFeedbackPanel().updateLabel("Please choose a card that is not flipped");
 				view.getFrame().pack();
