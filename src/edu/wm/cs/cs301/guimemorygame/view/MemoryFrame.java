@@ -25,6 +25,8 @@ public class MemoryFrame {
 	
 	private InstructionsWindow instructions;
 	
+	private PlayAgainWindow playAgainWindow;
+	
 	public MemoryFrame(MemoryModel model) {
 		this.model = model;
 		this.memoryGridPanel = new MemoryGridPanel(this, model);
@@ -86,6 +88,17 @@ public class MemoryFrame {
 	
 	public FeedbackPanel getFeedbackPanel() {
 		return feedbackPanel;
+	}
+	
+	public void loadPlayAgainWindow() {
+		playAgainWindow = new PlayAgainWindow(this, model);
+	}
+	
+	public void refresh() {
+		memoryGridPanel = new MemoryGridPanel(this, model);
+		frame.dispose();
+		frame = createAndShowGUI();
+		turnPanel.updateLabel("Turn: " + String.valueOf(model.getTurn()));
 	}
 
 }

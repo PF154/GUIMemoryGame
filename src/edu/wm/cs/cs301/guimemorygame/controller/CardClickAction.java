@@ -45,6 +45,8 @@ public class CardClickAction extends AbstractAction {
 						String finalTurn = String.valueOf(model.getTurn());
 						view.getTurnPanel().updateLabel("You won in " + finalTurn + " turn(s)!");
 						view.getFrame().pack();
+						
+						view.loadPlayAgainWindow();
 					}
 				} else {
 					// No match :(

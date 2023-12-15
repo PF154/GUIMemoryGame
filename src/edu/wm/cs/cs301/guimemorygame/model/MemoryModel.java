@@ -28,10 +28,10 @@ public class MemoryModel {
 		this.columns = 4;
 		this.selection = null;
 		
-		intitializeMemoryGrid();
+		initializeMemoryGrid();
 	}
 	
-	private void intitializeMemoryGrid() {
+	public void initializeMemoryGrid() {
 		memoryGrid = new MemoryCard[rows][columns];
 		
 		ArrayList<Character> symbolSet = new ArrayList<Character>();
