@@ -32,7 +32,7 @@ public class CardClickAction extends AbstractAction {
 //			System.out.println("Clicked button with visibility false");
 			button.flip();
 			view.getFrame().pack();
-			System.out.println("Flipped over button");
+//			System.out.println("Flipped over button");
 			if (model.getSelection() == null) {
 				model.setSelection(button);
 			} else {
@@ -76,8 +76,10 @@ public class CardClickAction extends AbstractAction {
 			//		Keep flipped if they're the same
 			//		Turn back over if they aren't
 		} else {
-			view.getFeedbackPanel().updateLabel("Please choose a card that is not flipped");
-			view.getFrame().pack();
+			if (!model.winState()) {
+				view.getFeedbackPanel().updateLabel("Please choose a card that is not flipped");
+				view.getFrame().pack();
+			}
 		}
 		
 	}

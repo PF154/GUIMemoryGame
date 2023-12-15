@@ -72,11 +72,6 @@ public class MemoryModel {
 	}
 	
 	public MemoryCard[][] getMemoryGrid() {
-		for (int i = 0; i < memoryGrid.length; i++) {
-			for (int j = 0; j < memoryGrid[0].length; j++) {
-				System.out.println(memoryGrid[i][j].getSymbol());
-			}
-		}
 		return memoryGrid;
 	}
 	

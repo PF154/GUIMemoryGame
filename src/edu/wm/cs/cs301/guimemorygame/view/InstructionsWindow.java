@@ -34,8 +34,6 @@ public class InstructionsWindow extends JDialog {
 		try {
 			sourceText = Files.readString(Paths.get("resources\\instructions.htm"), StandardCharsets.UTF_8);
 			
-			System.out.println(sourceText);
-			
 			instructionsText.setText(sourceText);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
