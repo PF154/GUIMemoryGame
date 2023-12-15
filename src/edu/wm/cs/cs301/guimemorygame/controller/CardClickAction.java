@@ -27,6 +27,8 @@ public class CardClickAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		MemoryCardButton button = (MemoryCardButton) e.getSource();
 		if (button.getVisibility() == false) {
+			view.getFeedbackPanel().updateLabel("");
+			view.getFrame().pack();
 //			System.out.println("Clicked button with visibility false");
 			button.flip();
 			view.getFrame().pack();
@@ -40,7 +42,8 @@ public class CardClickAction extends AbstractAction {
 					// increment match counter
 					model.incrementMatches();
 					if (model.winState()) {
-						view.getTurnPanel().updateLabel("You Win!");
+						String finalTurn = String.valueOf(model.getTurn());
+						view.getTurnPanel().updateLabel("You won in " + finalTurn + " turn(s)!");
 						view.getFrame().pack();
 					}
 				} else {
@@ -72,6 +75,9 @@ public class CardClickAction extends AbstractAction {
 			// 		Compare to symbol stored in model
 			//		Keep flipped if they're the same
 			//		Turn back over if they aren't
+		} else {
+			view.getFeedbackPanel().updateLabel("Please choose a card that is not flipped");
+			view.getFrame().pack();
 		}
 		
 	}

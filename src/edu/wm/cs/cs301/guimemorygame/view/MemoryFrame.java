@@ -1,10 +1,13 @@
 package edu.wm.cs.cs301.guimemorygame.view;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import edu.wm.cs.cs301.guimemorygame.model.MemoryModel;
 
@@ -18,12 +21,15 @@ public class MemoryFrame {
 	
 	private TurnPanel turnPanel;
 	
+	private FeedbackPanel feedbackPanel;
+	
 	private InstructionsWindow instructions;
 	
 	public MemoryFrame(MemoryModel model) {
 		this.model = model;
 		this.memoryGridPanel = new MemoryGridPanel(this, model);
 		this.turnPanel = new TurnPanel(model);
+		this.feedbackPanel = new FeedbackPanel(model);
 		this.frame = createAndShowGUI();
 		
 		this.instructions = new InstructionsWindow(this);
@@ -42,7 +48,7 @@ public class MemoryFrame {
 		});
 		
 		frame.add(memoryGridPanel.getPanel(), BorderLayout.CENTER);
-		frame.add(turnPanel.getPanel(), BorderLayout.SOUTH);
+		frame.add(lowerPanel(), BorderLayout.SOUTH);
 
 		
 		frame.pack();
@@ -52,6 +58,16 @@ public class MemoryFrame {
 		//System.out.println("Frame size: " + frame.getSize());
 		
 		return frame;
+	}
+	
+	private JPanel lowerPanel() {
+		JPanel panel = new JPanel(new GridLayout(0, 1, 0, 0));
+		panel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+		
+		panel.add(turnPanel.getPanel(), BorderLayout.NORTH);
+		panel.add(feedbackPanel.getPanel(), BorderLayout.SOUTH);
+		
+		return panel;
 	}
 	
 	public void shutdown() {
@@ -66,6 +82,10 @@ public class MemoryFrame {
 	
 	public TurnPanel getTurnPanel() {
 		return turnPanel;
+	}
+	
+	public FeedbackPanel getFeedbackPanel() {
+		return feedbackPanel;
 	}
 
 }
