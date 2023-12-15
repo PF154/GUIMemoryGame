@@ -36,7 +36,7 @@ public class MemoryFrame {
 		this.model = model;
 		this.memoryGridPanel = new MemoryGridPanel(this, model);
 		this.turnPanel = new TurnPanel(model);
-		this.feedbackPanel = new FeedbackPanel(model);
+		this.feedbackPanel = new FeedbackPanel();
 		this.frame = createAndShowGUI();
 		
 		this.instructions = new InstructionsWindow(this);
@@ -108,7 +108,6 @@ public class MemoryFrame {
 	}
 	
 	public void shutdown() {
-		// Should save leaderboard file here eventually
 		frame.dispose();
 		System.exit(0);
 	}

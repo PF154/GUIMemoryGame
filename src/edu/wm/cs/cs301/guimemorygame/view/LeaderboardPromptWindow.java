@@ -23,17 +23,15 @@ import edu.wm.cs.cs301.guimemorygame.model.MemoryModel;
 
 public class LeaderboardPromptWindow extends JDialog {
 	
-	private ExitAction exitAction;
-	private PlayAgainAction playAgainAction;
-	
 	private MemoryModel model;
 	
 	public LeaderboardPromptWindow(MemoryFrame view, MemoryModel model) {
 		super(view.getFrame(), "Leaderboard", true);
 		this.model = model;
-		this.exitAction = new ExitAction(view, this);
-		this.playAgainAction = new PlayAgainAction(view, model, this);
 		
+		JLabel promptLabel = new JLabel("Type your name and press ENTER");
+		
+		add(promptLabel, BorderLayout.NORTH);
 		add(entryPanel(), BorderLayout.CENTER);
 		
 		pack();
@@ -50,6 +48,8 @@ public class LeaderboardPromptWindow extends JDialog {
 		
 		textField.addActionListener(new ActionListener() {
 
+			// Add the current score to the leaderboard and dispose of the dialog
+			
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.setPlayerName(textField.getText());

@@ -13,12 +13,9 @@ public class FeedbackPanel extends JPanel {
 	
 	private JPanel panel;
 	
-	private MemoryModel model;
-	
 	private JLabel label;
 	
-	public FeedbackPanel(MemoryModel model) {
-		this.model = model;
+	public FeedbackPanel() {
 		this.panel = createFeedbackPanel();
 	}
 	

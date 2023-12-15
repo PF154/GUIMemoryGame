@@ -2,7 +2,6 @@ package edu.wm.cs.cs301.guimemorygame.view;
 
 import java.awt.BorderLayout;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;

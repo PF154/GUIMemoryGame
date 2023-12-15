@@ -29,7 +29,6 @@ public class MemoryCardButton extends JButton {
 	
 	public Character getSymbol() {
 		return symbol;
-		// These functions should probably modify the MC as well to keep it updated
 	}
 	
 	public boolean getVisibility() {
@@ -40,12 +39,11 @@ public class MemoryCardButton extends JButton {
 		if(visible) {
 			visible = false;
 			displaySymbol  = "?";
-			// Need to do something here to repack the buttons with new size
-			// Code to change displayed text to question mark
+			memoryCard.setVisible(false);
 		} else {
 			visible = true;
 			displaySymbol  = symbol.toString();
-			// Code to change displayed text to symbol
+			memoryCard.setVisible(true);
 		}
 		setText(displaySymbol);
 	}

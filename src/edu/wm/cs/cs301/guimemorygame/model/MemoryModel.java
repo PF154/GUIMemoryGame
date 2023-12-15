@@ -85,26 +85,25 @@ public class MemoryModel {
 	}
 	
 	public void setDifficulty(int d) {
+		// Set variables as needed and initialize a new memory grid
+		
 		switch(d) {
 		case 0:
 			rows = 3;
 			columns = 4;
 			difficulty = 0;
-			// Set leaderboard info however you want to do that here
 			initializeMemoryGrid();
 			break;
 		case 1:
 			rows = 4;
 			columns = 7;
 			difficulty = 1;
-			// Set leaderboard info however you want to do that here
 			initializeMemoryGrid();
 			break;
 		case 2:
 			rows = 7;
 			columns = 8;
 			difficulty = 2;
-			// Set leaderboard info however you want to do that here
 			initializeMemoryGrid();
 			break;
 		}	
@@ -245,6 +244,8 @@ public class MemoryModel {
 	}
 	
 	public boolean winState() {
+		// Returns true if the player has won, false otherwise
+		
 		int needed = (rows * columns) / 2;
 		if (matches == needed) {
 			return true;
