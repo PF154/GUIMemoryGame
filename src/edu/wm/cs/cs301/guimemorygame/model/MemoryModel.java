@@ -20,6 +20,8 @@ public class MemoryModel {
 	
 	private int matches;
 	
+	private int difficulty;
+	
 	private MemoryCardButton selection;
 	
 	public MemoryModel() {
@@ -27,6 +29,7 @@ public class MemoryModel {
 		this.rows = 3;
 		this.columns = 4;
 		this.selection = null;
+		this.difficulty = 1;
 		
 		initializeMemoryGrid();
 	}
@@ -70,6 +73,32 @@ public class MemoryModel {
 		turn = 1;
 		matches = 0;
 	}
+	
+	public void setDifficulty(int difficulty) {
+		switch(difficulty) {
+		case 0:
+			rows = 3;
+			columns = 4;
+			// Set leaderboard info however you want to do that here
+			initializeMemoryGrid();
+			break;
+		case 1:
+			rows = 4;
+			columns = 7;
+			// Set leaderboard info however you want to do that here
+			initializeMemoryGrid();
+			break;
+		case 2:
+			rows = 7;
+			columns = 8;
+			// Set leaderboard info however you want to do that here
+			initializeMemoryGrid();
+			break;
+		}
+			
+			
+	}
+
 	
 	public MemoryCard[][] getMemoryGrid() {
 		return memoryGrid;
